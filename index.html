@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - Магазин</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        
+        *{margin:0;padding:0;box-sizing:border-box}body{font-family:Arial,sans-serif;background:#f8fafc;color:#1f2937}.header{background:linear-gradient(135deg,#2563eb,#1e40af);color:white;padding:1rem 0;position:fixed;width:100%;top:0;z-index:1000;box-shadow:0 10px 30px rgba(0,0,0,0.1)}.nav{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:0 2rem}.logo{font-size:1.8rem;font-weight:bold}.cart{position:relative;cursor:pointer;font-size:1.5rem}.cart-count{position:absolute;top:-8px;right:-8px;background:#f59e0b;color:white;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:bold}.hero{background:linear-gradient(135deg,#2563eb,#1e40af);color:white;text-align:center;padding:120px 2rem 80px}.hero h1{font-size:3rem;margin-bottom:1rem}.products{padding:80px 2rem;max-width:1200px;margin:0 auto}.section-title{text-align:center;font-size:2.5rem;margin-bottom:3rem;color:#1f2937}.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}.product-card{background:white;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.1);transition:all 0.4s}.product-card:hover{transform:translateY(-10px);box-shadow:0 30px 60px rgba(0,0,0,0.2)}.product-image{height:250px;overflow:hidden}.product-image img{width:100%;height:100%;object-fit:cover}.badge{position:absolute;top:15px;right:15px;background:#f59e0b;color:white;padding:0.5rem 1rem;border-radius:20px;font-size:0.8rem;font-weight:bold}.product-info{padding:1.5rem}.product-title{font-size:1.3rem;font-weight:bold;margin-bottom:0.5rem}.product-price{font-size:1.8rem;font-weight:bold;color:#2563eb;margin-bottom:1rem}.add-to-cart{width:100%;padding:1rem;background:#2563eb;color:white;border:none;border-radius:10px;font-size:1.1rem;font-weight:bold;cursor:pointer;transition:all 0.3s}.add-to-cart:hover{transform:scale(1.05)}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">🛒 TechStore</div>
+            <div class="cart" id="cartBtn">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>🔥 Лучшая электроника</h1>
+        <p>Скидки до 50% - Быстрая доставка!</p>
+    </section>
+
+    <section class="products">
+        <h2 class="section-title">📦 Товары в наличии</h2>
+        <div class="products-grid" id="productsGrid">
+            <!-- ТОВАРЫ ПОЯВЯТСЯ ЗДЕСЬ -->
+        </div>
+    </section>
+
+    <script>
+        // ✅ ТОВАРЫ - РЕАЛЬНЫЕ ИЗОБРАЖЕНИЯ!
+        const products = [
+            {
+                id: 1, name: "iPhone 15 Pro", price: 1000, image: "https://i.ibb.co/7v3Qj3w/iphone.jpg",
+                badge: "-20%"
+            },
+            {
+                id: 2, name: "MacBook Pro", price: 2000, image: "https://i.ibb.co/5YqN9nR/macbook.jpg",
+                badge: "Новинка"
+            },
+            {
+                id: 3, name: "Samsung S24", price: 3000, image: "https://i.ibb.co/3mR8QhL/samsung.jpg",
+                badge: "Хит"
+            },
+            {
+                id: 4, name: "iPad Pro", price: 2000, image: "https://i.ibb.co/kcW3m2P/ipad.jpg",
+                badge: "-15%"
+            },
+            {
+                id: 5, name: "AirPods Pro 2", price: 1000, image: "https://i.ibb.co/1Jykm5w/airpods.jpg",
+                badge: "🔥"
+            },
+            {
+                id: 6, name: "Apple Watch", price: 100, image: "https://i.ibb.co/wZfV7nD/watch.jpg",
+                badge: "Бестселлер"
+            }
+        ];
+
+        let cart = [];
+
+        // 🎉 ГЕНЕРИРУЕМ ТОВАРЫ ПРЯМО СЕЙЧАС!
+        document.addEventListener('DOMContentLoaded', function() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = products.map(product => `
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" loading="lazy">
+                        <span class="badge">${product.badge}</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <div class="product-price">${product.price.toLocaleString()}$</div>
+                        <button class="add-to-cart" onclick="addToCart(${product.id})">
+                            🛒 В КОРЗИНУ
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            console.log('✅ 6 товаров загружено!');
+        });
+
+        function addToCart(id) {
+            cart.push(id);
+            document.getElementById('cartCount').textContent = cart.length;
+            alert('✅ Товар добавлен в корзину!');
+        }
+    </script>
+</body>
+</html>
